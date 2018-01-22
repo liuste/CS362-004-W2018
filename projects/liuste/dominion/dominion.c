@@ -716,7 +716,7 @@ int villageFunc(struct gameState *state, int currentPlayer, int handPos)
       
   //discard played card from hand
   discardCard(handPos, currentPlayer, state, 0);
-  return -1;
+  return 0;
 }
 
 int great_hallFunc(struct gameState *state, int currentPlayer, int handPos)
