@@ -5,7 +5,14 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include <assert.h>
+
+int assert(int number)
+{
+	if(number == 0)
+		return 0;
+	else
+		return 1;
+}
 
 int main (int argc, char** argv)	{
 	struct gameState G;
@@ -28,10 +35,11 @@ int main (int argc, char** argv)	{
 	G.deck[0][4] = mine;
 	
 	temp = cardEffect(smithy, 0, 0, 0, &G, 0, 0);
-	assert(temp == 0);
-	printf("handCount (should be 7)= %d\n", G.handCount[0]);
-	assert(G.handCount[0] == 7);
-	printf("\nTEST SUCCESSFULLY COMPLETED\n");
-	
+	if (assert(temp == 0))
+		printf("handCount (should be 7)= %d\n", G.handCount[0]);
+	if(assert(G.handCount[0] == 7))
+		printf("\nTEST SUCCESSFULLY COMPLETED\n");
+	else
+		printf("\nFAILED\n");
 	return 0;
 } 
