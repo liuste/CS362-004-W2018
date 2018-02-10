@@ -5,35 +5,20 @@
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+    int j;
+    char randomChar = "[({ ax})]"[random () % 9];
+    return randomChar;
 }
 
 char *inputString()
 {
-    int x, y;
-	char word[4] = "word";
-
-	static char string[5];
-
-	if((rand() % 2) == 0)
-	{
-		for(i = 0; i < 4; i++)
-		{
-			string[i] = (rand() % 95) + 32;
-		}
-	}
-	else
-	{
-		for(i = 0; i < 4; i++)
-		{
-			j = (rand() % 4);
-			string[i] = word[j];
-		}
-	}
-
-	string[5] = '\0';
-	return string;
+  int i;
+  char randomAlphabet[5];
+  for (i = 0; i < 5; i++)
+  {
+    randomAlphabet[i] = "reset"[random () % 5];
+  }
+  return randomAlphabet;
 }
 
 void testme()
