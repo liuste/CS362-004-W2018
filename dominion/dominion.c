@@ -651,7 +651,7 @@ int adventurerFunc(struct gameState *state, int drawntreasure, int currentPlayer
       shuffle(currentPlayer, state);
     }
     drawCard(currentPlayer, state);
-    cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]];//top card of hand is most recently drawn card.
+    cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
     if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
       drawntreasure++;
     else{
@@ -670,7 +670,7 @@ int adventurerFunc(struct gameState *state, int drawntreasure, int currentPlayer
 int smithyFunc(int i, struct gameState *state, int currentPlayer, int handPos)
 {
   //+3 Cards
-  for (i = 0; i <= 3; i++)
+  for (i = 0; i < 3; i++)
   {
     drawCard(currentPlayer, state);
   }

@@ -6,6 +6,37 @@ rngs.o: rngs.h rngs.c
 dominion.o: dominion.h dominion.c rngs.o
 	gcc -c dominion.c -g  $(CFLAGS)
 
+adventurer:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c randomtestadventurer.c rngs.c -o randomtestadventurer -lm -g
+
+runAdventurer: adventurer
+	./randomtestadventurer &> randomtestadventurer.out
+	gcov randomtestadventurer.c -b >> randomtestadventurer.out
+	cat randomtestadventurer.c.gcov >> randomtestadventurer.out
+
+randomcard1:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c randomtestcard1.c rngs.c -o randomtestcard1 -lm -g
+
+runRandomCard1: randomcard1
+	./randomtestcard1 &> randomtestcard1.out
+	gcov randomtestcard1.c -b >> randomtestcard1.out
+	cat randomtestcard1.c.gcov >> randomtestcard1.out
+
+randomcard2:
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c randomtestcard2.c rngs.c -o randomtestcard2 -lm -g
+
+runRandomCard2: randomcard2
+	./randomtestcard2 &> randomtestcard2.out
+	gcov randomtestcard2.c -b >> randomtestcard2.out
+	cat randomtestcard2.c.gcov >> randomtestcard2.out
+
+myRandTest:
+	./randomtestadventurer &> randtestresult.out
+	./randomtestcard >> randtestresult.out
+	./randomtestcard2 >> randtestresult.out
+	gcov dominion.c >> randtestresult.out
+	cat dominion.c.gcov >> randtestresult.out
+
 playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
 
@@ -39,15 +70,34 @@ unit4:
 card1:
 	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.o cardtest1.c rngs.o -o cardtest1 -lm -g
 
+runCard1: card1
+	./cardtest1 &> cardtest1.out
+	gcov cardtest1.c -b >> cardtest1.out
+	cat cardtest1.c.gcov >> cardtest1.out
+
 card2:
 	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.o cardtest2.c rngs.o -o cardtest2 -lm -g
+
+runCard2: card2
+	./cardtest2 &> cardtest2.out
+	gcov cardtest2.c -b >> cardtest2.out
+	cat cardtest2.c.gcov >> cardtest2.out
 
 card3:
 	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.o cardtest3.c rngs.o -o cardtest3 -lm -g
 
+runCard3: card3
+	./cardtest3 &> cardtest3.out
+	gcov cardtest3.c -b >> cardtest3.out
+	cat cardtest3.c.gcov >> cardtest3.out
+
 card4:
 	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.o cardtest4.c rngs.o -o cardtest4 -lm -g
 
+runCard4: card4
+	./cardtest4 &> cardtest4.out
+	gcov cardtest4.c -b >> cardtest4.out
+	cat cardtest4.c.gcov >> cardtest4.out
 
 myTest:
 	./unittest1 &> unittestresult.out
