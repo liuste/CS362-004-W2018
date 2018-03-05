@@ -1,0 +1,110 @@
+        -:    0:Source:randomtestcard1.c
+        -:    0:Graph:randomtestcard1.gcno
+        -:    0:Data:randomtestcard1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <string.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <math.h>
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:#define MAX_TESTS 100000
+        -:   10:
+function assert called 400000 returned 100% blocks executed 100%
+   400000:   11:int assert(int number)
+        -:   12:{
+   400000:   13:	if(number == 0)
+branch  0 taken 25% (fallthrough)
+branch  1 taken 75%
+   100194:   14:		return 0;
+        -:   15:	else
+   299806:   16:		return 1;
+        -:   17:}
+        -:   18:
+function main called 1 returned 100% blocks executed 94%
+        1:   19:int main ()	{
+        1:   20:	int k[10] = {adventurer, council_room, feast, village, great_hall, embargo, cutpurse, sea_hag, baron, smithy};
+        -:   21:	struct gameState state;
+        -:   22:	int i;
+        -:   23:	int temp;
+        -:   24:	int pre1;
+        -:   25:	int pre2;
+        1:   26:	int player_count = 0;
+        1:   27:	int player = 0;
+        1:   28:	srand(time(NULL));
+call    0 returned 100%
+call    1 returned 100%
+        -:   29:	int seed;
+   100001:   30:	for (i = 0; i < MAX_TESTS; i++) {
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+   100000:   31:		pre1 = 0;
+   100000:   32:		pre2 = 0;
+   100000:   33:		temp = 1;
+   100000:   34:		seed = rand();		//pick random seed
+call    0 returned 100%
+   100000:   35:		player_count = rand() % 3 + 2;
+call    0 returned 100%
+   100000:   36:		player = rand() % player_count;
+call    0 returned 100%
+   100000:   37:		initializeGame(player_count, k, seed, &state);	//initialize Gamestate
+call    0 returned 100%
+        -:   38:	
+   100000:   39:		printf ("\n******Random Card Test Village******\n");
+call    0 returned 100%
+        -:   40:
+   100000:   41:		state.whoseTurn = player;
+   100000:   42:		state.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
+call    0 returned 100%
+   100000:   43:		state.discardCount[player] = rand() % MAX_DECK;
+call    0 returned 100%
+   100000:   44:		state.handCount[player] = rand() % MAX_HAND;
+call    0 returned 100%
+   100000:   45:		state.hand[player][0] = village;
+   100000:   46:		state.numActions = rand() % 10; 
+call    0 returned 100%
+   100000:   47:		pre1 = state.numActions;
+   100000:   48:		pre2 = state.deckCount[player];
+        -:   49:		//printf("pre2: %d\n", pre2);
+   100000:   50:		temp = cardEffect(village, 0, 0, 0, &state, 0, 0);
+call    0 returned 100%
+        -:   51:		//printf("state.handCount[player] after cardEffect function call: %d\n", state.handCount[player]);
+   100000:   52:		if (assert(temp == 0))
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0%
+   100000:   53:			printf("\nTEST SUCCESSFULLY COMPLETED\n");
+call    0 returned 100%
+   100000:   54:		if (assert(state.deckCount[player] == pre2 - 1))
+call    0 returned 100%
+branch  1 taken 99% (fallthrough)
+branch  2 taken 1%
+    99806:   55:			printf("\nTEST SUCCESSFULLY COMPLETED\n");
+call    0 returned 100%
+        -:   56:		else
+      194:   57:			printf("\nFAILED\n");
+call    0 returned 100%
+   100000:   58:		if (assert(state.handCount[0] == 0))
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+    #####:   59:			printf("\nTEST SUCCESSFULLY COMPLETED\n");
+call    0 never executed
+        -:   60:		else 
+   100000:   61:			printf("\nFAILED\n");
+call    0 returned 100%
+   100000:   62:		if(assert(state.numActions == pre1 + 2))
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0%
+   100000:   63:			printf("\nTEST SUCCESSFULLY COMPLETED\n");
+call    0 returned 100%
+        -:   64:		else 
+    #####:   65:			printf("\nFAILED\n");
+call    0 never executed
+        -:   66:	}
+        1:   67:	return 0;
+        -:   68:} 

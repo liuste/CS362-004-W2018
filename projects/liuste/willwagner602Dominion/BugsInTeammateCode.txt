@@ -1,0 +1,15 @@
+Assignment-5										Stephen Liu
+
+Bug-Reports
+
+1st Bug: I placed my unit tests inside the projects/liuste/willwagner602Dominion.  
+I found a bug in the refactored village_effect function using both my unit test (called cardtest4.c) and my random test (called randomtestcard1.c).  
+Both the unit test and random test reported that the handCount test FAILED.  If the village_effect function worked correctly, the handCount test should be true if asserted as 0.  
+This is because the way the dominion code is setup, the discardCard function is called inside the card (in this case village card) so the handCount becomes 0.  
+We can see that discardCard function was removed from William’s refactored village_effect function when compared to the master dominion code.  
+The discardCard function should have been inside the card function like how it is inside the refactored smithy_effect function in William’s code.
+
+2nd bug: The second bug is found in the refactored smithy_effect function using both my unit test (called cardtest3.c) and my random test (called randomtestcard2.c).  
+Both the unit test and random test reported that the handCount test FAILED.  In the unit test, the handCount should be 7 but instead it was 8.  
+Upon inspection of the smithy_effect function we see for (i = 0; i <= 3; i++) instead of the for (i = 0; i < 3; i++) in the master dominion code.  
+This causes +4 cards instead of +3 cards.     
